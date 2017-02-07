@@ -5,3 +5,4 @@
 *.aps
 [Dd]ebug/
 [Rr]elease/
+*.db

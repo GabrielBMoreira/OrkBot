@@ -1,6 +1,8 @@
 #pragma once
 #include "Constants.h"
 
+#pragma comment(lib, "winmm.lib")
+
 #define PROGRAMNAME			"OrkBot\0"
 #define PROGRAMCLASSNAME	"ORKBOT\0"
 

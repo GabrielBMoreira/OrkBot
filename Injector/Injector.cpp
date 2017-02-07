@@ -111,7 +111,7 @@ void GetPlayerName(HANDLE hProcess, char *lpName)
 	char name[32];
 	int playerID;
 	ReadProcessMemory(hProcess, (LPVOID)Address::PLAYER_ID, &playerID, 4, 0);
-	for(int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += sizeof(SCreature))
+	for(int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += SCreature::SizeInBytes)
 	{
 		int cID;
 		ReadProcessMemory(hProcess, (LPVOID)i, &cID, 4, 0);
@@ -129,7 +129,7 @@ void RefreshList(void)
 	HANDLE hProcess;
 	int x = 0;
 
-	char buffer[128];
+	char buffer[256];
 	SendMessage(hWndList, LB_RESETCONTENT, (WPARAM)0, (LPARAM)0);
 	do{
 		temp = FindWindowEx(0, temp, "TibiaClient", 0);
@@ -138,7 +138,12 @@ void RefreshList(void)
 		else
 		{
 			GetWindowThreadProcessId(temp, &clients[x].dwProcessId);
+			
 			hProcess = OpenProcess(PROCESS_VM_READ, false, clients[x].dwProcessId);
+
+			DWORD lpdwFlags[100];
+			int result = GetHandleInformation(hProcess, lpdwFlags);
+
 			int isOnline;
 			ReadProcessMemory(hProcess, (LPVOID)Address::ISONLINE, &isOnline, 4, 0);
 			if(isOnline == 8)

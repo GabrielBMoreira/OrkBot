@@ -1,0 +1,7 @@
+== InjectLibrary ==
+Call OpenProcess() returned [660]
+Call VirtualAllocEx() returned [197066752]
+Call WriteProcessMemory() returned [1]
+Call CreateRemoteThread() returned [664]
+Call WaitForSignleObject() retruned [0]
+Call VirtualFreeEx() returned [TRUE]

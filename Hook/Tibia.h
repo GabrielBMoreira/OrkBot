@@ -2,6 +2,9 @@
 #include "Constants.h"
 
 struct SCreature {
+
+	static const byte SizeInBytes = 168;
+
 	unsigned int CreatureID;
 	char Name[32];
 	unsigned int X;
@@ -35,6 +38,7 @@ struct SCreature {
 	unsigned int unknown8;
 	unsigned int GUILDWARFlag;
 	unsigned int IsBlocking;
+
 };
 
 struct SContainerItem{

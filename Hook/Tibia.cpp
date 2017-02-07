@@ -18,7 +18,7 @@ CTibia::~CTibia(void)
 unsigned int CTibia::GetPlayer(void)
 {
 	unsigned int *playerID = (unsigned int*)Address::PLAYER_ID, *cID;
-	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += sizeof(SCreature))
+	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += SCreature::SizeInBytes)
 	{
 		cID = (unsigned int*)i;
 		if(*playerID == *cID)
@@ -37,7 +37,7 @@ unsigned int CTibia::GetPlayer(unsigned int nID, bool OnScreen)
 	int *playerX = (int*)Address::PLAYER_X;
 	int *playerY = (int*)Address::PLAYER_Y;
 	int *playerZ = (int*)Address::PLAYER_Z;
-	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += sizeof(SCreature))
+	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += SCreature::SizeInBytes)
 	{
 		c = (SCreature*)i;
 		if(c->CreatureID == 0)
@@ -66,7 +66,7 @@ unsigned int CTibia::GetPlayer(unsigned int nID, bool OnScreen)
 unsigned int CTibia::GetPlayer(char *lpName)
 {
 	SCreature *c;
-	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += sizeof(SCreature))
+	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += SCreature::SizeInBytes)
 	{
 		c = (SCreature*)i;
 		if(stricmp(c->Name, lpName) == 0)
@@ -84,7 +84,7 @@ unsigned int CTibia::GetFriend(unsigned int nMinHealth)
 	int *playerX = (int*)Address::PLAYER_X;
 	int *playerY = (int*)Address::PLAYER_Y;
 	int *playerZ = (int*)Address::PLAYER_Z;
-	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += sizeof(SCreature))
+	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += SCreature::SizeInBytes)
 	{
 		c = (SCreature*)i;
 		if(c->CreatureID == 0)
@@ -134,7 +134,7 @@ unsigned int CTibia::GetEnemy(unsigned int nMinHealth)
 	int *playerX = (int*)Address::PLAYER_X;
 	int *playerY = (int*)Address::PLAYER_Y;
 	int *playerZ = (int*)Address::PLAYER_Z;
-	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += sizeof(SCreature))
+	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += SCreature::SizeInBytes)
 	{
 		c = (SCreature*)i;
 		if(c->CreatureID == 0)
@@ -330,7 +330,7 @@ int CTibia::AutoAllyHeal(void)
 	GetWindowText(hAutoHealDelay, buf, 32);
 	unsigned int dwDelay = atoi(buf);
 	unsigned int dwTime = timeGetTime();
-	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += sizeof(SCreature))
+	for(unsigned int i = Address::BATTLELIST_BEGIN; i < Address::BATTLELIST_END; i += SCreature::SizeInBytes)
 	{
 		c = (SCreature*)i;
 		if(c->CreatureID == 0)
